@@ -33,12 +33,12 @@ public class PanelOpciones extends JPanel implements ActionListener {
     /**
      * Constante OPCION_1, usada para la opción de la extensión 1.
      */
-    private final static String OPCION_1 = "Más Antiguo";
+    private final static String OPCION_1 = "Más Antiguo"; // Se cambia el nombre del boton
 
     /**
      * Constante OPCION_2, usada para la opción de la extensión 2.
      */
-    private final static String OPCION_2 = "Promedio";
+    private final static String OPCION_2 = "Promedio"; // Se cambia el nombre del boton
 
 
     // -----------------------------------------------------------------
