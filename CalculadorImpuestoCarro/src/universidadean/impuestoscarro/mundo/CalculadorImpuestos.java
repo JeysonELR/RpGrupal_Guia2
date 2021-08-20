@@ -179,9 +179,12 @@ public class CalculadorImpuestos {
      */
     private RangoImpuesto buscarRangoImpuesto(double valor) {
         RangoImpuesto rango = null;
-
+        
+        // Se recorre el vector de rangosImpuesto y se instancia un objeto RangoImpuesto @ri
         for (RangoImpuesto ri: rangosImpuesto){
+            // Se utiliza la funcion contieneA para validar si el valor dado hace parte del ri actual
             if (ri.contieneA(valor)){
+                // Se asigna el valor del objeto ri al objeto rango si la condicion es satisfactoria
                 rango = ri;
             }
         }
@@ -200,24 +203,32 @@ public class CalculadorImpuestos {
      */
     public double calcularPago(boolean descProntoPago, boolean descServicioPublico, boolean descTrasladoCuenta) {
         double pago = 0.0;
+        // Se asigna el valor del precio del vehiculo actual a la variable precio.
         double precio = darVehiculoActual().darPrecio();
         // Calcula el impuesto según el precio del vehículo
         RangoImpuesto rango = buscarRangoImpuesto(precio);
-
+        // Calcula el pago multiplicando el precio del vehiculo por el porcentaje del rango al que pertenece
         pago = precio * rango.darPorcentaje()/100.0;
 
         // TODO: Encontrar el valor del pago de impuesto de acuerdo a los datos de entrada
+        // Valida si el vehiculo dado cuenta con descuento por pronto pago
         if (descProntoPago){
+            // se creal la variable descuentoProntoPago para calcular el valor correspondiente
             double descuentoProntoPago = pago * (PORC_DESC_PRONTO_PAGO/100.0);
-            pago = pago - descuentoProntoPago;
+            // Se calcula el pago sustrayendo el valor de descuentoProntoPago
+            pago -= descuentoProntoPago;
         }
+        // Valida si el vehiculo dado cuenta con descuento de servicio publico
         if (descServicioPublico){
-            double descuentoServicioPublico = VALOR_DESC_SERVICIO_PUBLICO;
-            pago = pago - descuentoServicioPublico;
+            // Se calcula el pago sustrayendo el valor de VALOR_DESC_SERVICIO_PUBLICO
+            pago -= VALOR_DESC_SERVICIO_PUBLICO;
         }
+        // Valida si el vehiculo dado cuenta con descuento traslado de cuenta
         if (descTrasladoCuenta){
+            // se creal la variable descuentroTasladoCuenta para calcular el valor correspondiente
             double descuentroTasladoCuenta = pago * (PORC_DESC_TRASLADO_CUENTA/100.0);
-            pago = pago - descuentroTasladoCuenta;
+            // Se calcula el pago sustrayendo el valor de descuentroTasladoCuenta
+            pago -= descuentroTasladoCuenta;
         }
 
         return pago;
@@ -298,11 +309,15 @@ public class CalculadorImpuestos {
      * @return El vehículo más caro.
      */
     public Vehiculo buscarVehiculoMasCaro() {
+        // Se asigna el vehiculo que se encuentra en la primera posicion del vector vehiculos a la variable @masCaro
         Vehiculo masCaro = vehiculos[0];
 
         // TODO: Buscar el vehículo más caro del arreglo de vehículos
+        // Se recorre el vector de vehiculos y se instancia un objeto Vehiculo @v
         for (Vehiculo v: vehiculos){
+            // Se valida si el precio del vehiculo @v el mayor al que tiene el vehiculo @masCaro
             if(v.darPrecio() > masCaro.darPrecio()){
+                // se asigna el valor de @v a @masCaro
                 masCaro = v;
             }
         }
@@ -322,8 +337,11 @@ public class CalculadorImpuestos {
         Vehiculo buscado = null;
 
         // TODO: Retornar el primer vehículo que tiene la marca dada
+        // Se recorre el vector de vehiculos y se instancia un objeto Vehiculo @v
         for (Vehiculo v : vehiculos){
+            // Se valida si la marca del vehiculo @v el igual a la de la variable @marca
             if (v.darMarca().equalsIgnoreCase(marca)){
+                // se asigna el valor de @v a @buscado
                 buscado = v;
             }
         }
@@ -342,8 +360,11 @@ public class CalculadorImpuestos {
         Vehiculo buscado = null;
 
         // TODO: Buscar el primer vehículo que tiene la línea dada
+        // Se recorre el vector de vehiculos y se instancia un objeto Vehiculo @v
         for (Vehiculo v : vehiculos){
+            // Se valida si la linea del vehiculo @v el igual a la de la variable @linea
             if (v.darLinea().equalsIgnoreCase(linea)){
+                // se asigna el valor de @v a @buscado
                 buscado = v;
             }
         }
@@ -357,11 +378,15 @@ public class CalculadorImpuestos {
      * @return El vehículo más antiguo.
      */
     public Vehiculo buscarVehiculoMasAntiguo() {
+        // Se asigna el vehiculo que se encuentra en la primera posicion del vector vehiculos a la variable @buscado
         Vehiculo buscado = vehiculos[0];
 
         // TODO: Buscar el vehículo más antiguo del sistema
+        // Se recorre el vector de vehiculos y se instancia un objeto Vehiculo @v
         for (Vehiculo v : vehiculos){
+            // Se valida si el anio del vehiculo @v es menor al de la variable @buscado
             if (Integer.parseInt(v.darAnio()) < Integer.parseInt(buscado.darAnio())){
+                // se asigna el valor de @v a @buscado
                 buscado = v;
             }
         }
@@ -376,11 +401,15 @@ public class CalculadorImpuestos {
      */
     public double promedioPreciosVehiculos() {
         double promedio = 0.0;
+        // se crea la variable suma para guarda el valor de la suma de los precios de los vehiculos
         double suma = 0.0;
-
+        
+        // Se recorre el vector de vehiculos y se instancia un objeto Vehiculo @v
         for (Vehiculo v : vehiculos){
+            // se guarda dentro de suma el valor que se lleva mas el valor del precio del vehiculo actual
             suma += v.darPrecio();
         }
+        // Se calcula el promedio de los precios de los vehiculos
         promedio = suma / vehiculos.length;
 
         return promedio;
