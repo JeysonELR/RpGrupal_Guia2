@@ -257,6 +257,7 @@ public class InterfazImpuestosCarro extends JFrame {
      */
     public void reqFuncOpcion2() {
         double respuesta = calculador.promedioPreciosVehiculos();
+        // Se agrega formateador para que el valor del promedio calculado se muestre separado por miles
         DecimalFormat df = (DecimalFormat) NumberFormat.getInstance();
         df.applyPattern("$ ###,###.##");
         JOptionPane.showMessageDialog(this, df.format(respuesta), "Respuesta", JOptionPane.INFORMATION_MESSAGE);
